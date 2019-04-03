@@ -70,10 +70,13 @@
 [========]
 <font face="黑体" color=gray size=72><P ALIGN="CENTER">第二章</P></font>
 
-#1. 项目名称：魔镜
-#2. 项目内容
+# 1.项目名称：魔镜
+# 2.项目内容
 &#160; &#160; &#160; &#160;利用树莓派和原子镜，完成显示屏一边和镜子一样反射光线显示镜像，一边与树莓派相连，动态显示天气、温湿度信息等任务。借助语音识别sdk,完成人机交互。
-#3. 架构图 
-![项目架构图](https://github.com/fighting-six/fightingsix/blob/master/picture/pic1.jpg "项目架构图")
+# 3.项目架构 
+## 3.1 项目关联图
+![项目关联图](https://github.com/fighting-six/fightingsix/blob/master/picture/pic1.jpg "项目关联图")
+## 3.2 项目架构图
+![项目架构图](https://github.com/fighting-six/fightingsix/blob/master/picture/pic2.jpg "项目架构图")
 
 
