@@ -1,4 +1,4 @@
-<font face="黑体" color=gray size=72><P ALIGN="CENTER">第0章 小组介绍</P></font>
+<font face="黑体" color=gray size=72><P ALIGN="CENTER">第零章 小组介绍</P></font>
 # 0 小组介绍
 ## 0.1 小组名称
 
