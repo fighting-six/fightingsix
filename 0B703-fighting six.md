@@ -1,3 +1,11 @@
+<font face="黑体" color=gray size=72><P ALIGN="CENTER">小组介绍</P></font>
+# 0 小组介绍
+## 0.1 小组名称：fighting six
+## 0.2 小组成员
+|组长|程超楠|
+|组员|李林潇 吴丹丹 韩伟 陈亚昊 许运丰|
+
+
 <font face="黑体" color=gray size=72><P ALIGN="CENTER">第一章 开发环境</P></font>
 &#160; &#160; &#160; &#160;基于树莓派和主机系统，介绍其执行环境（硬件环境）、运行环境（软件环境）和编程环境。
 # 1.1 树莓派
