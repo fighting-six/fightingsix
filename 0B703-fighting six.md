@@ -352,6 +352,7 @@ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
 - -O FEATURE [,...]：启用指定特性
 - -O ^FEATURE：关闭指定特性
 - 开始对上述sdb1分区进行格式化，写入文件系统
+
 ![17](https://github.com/fighting-six/fightingsix/blob/master/picture/17.jpg)
 
 ## 3.5.4 挂载使用
