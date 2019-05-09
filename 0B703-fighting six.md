@@ -326,3 +326,4 @@
 - 在根目录下 mkdir MYDATA，然后用mount命令执行挂载，ls能看到Ext中标准产生的目录，到此硬盘分区，格式化，挂载，一切正常。
 ![18](https://github.com/fighting-six/fightingsix/blob/master/picture/18.jpg)
 
+ export PATH=$PATH:$HOME/Rpi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin
