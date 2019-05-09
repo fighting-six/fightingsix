@@ -232,27 +232,35 @@ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
 
 ## 3.4.1 hello kernel代码
 - hello.c
+
 ![pic3](https://github.com/fighting-six/fightingsix/blob/master/picture/pic3.jpg)
 
 ## 3.4.2 Makefile
+
 ![pic4](https://github.com/fighting-six/fightingsix/blob/master/picture/pic4.jpg)
 
 ## 3.4.3 执行make
+
 ![pic5](https://github.com/fighting-six/fightingsix/blob/master/picture/pic5.jpg)
 
 ## 3.4.4 执行insmod加载内核模块
+
 ![pic6](https://github.com/fighting-six/fightingsix/blob/master/picture/pic6.jpg)
 
 ## 3.4.5 lsmod 可以查看到自己的模块
+
 ![pic7](https://github.com/fighting-six/fightingsix/blob/master/picture/pic7.jpg)
 
 ## 3.4.6 dmesg可以看到打印的log
+
 ![pic8](https://github.com/fighting-six/fightingsix/blob/master/picture/pic8.jpg)
 
 ## 3.4.7 执行rmmod卸载内核模块
+
 ![pic9](https://github.com/fighting-six/fightingsix/blob/master/picture/pic9.jpg)
 
 ## 3.4.8 dmesg可以看到打印的log
+
 ![pic10](https://github.com/fighting-six/fightingsix/blob/master/picture/pic10.jpg)
 
 
@@ -262,6 +270,7 @@ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
 - 日志文件系统
 
 - 指在文件系统发生变化时，先把相关的信息写入一个被称为日志的区域，然后再把变化写入主文件系统的文件系统。在文件系统发生故障（如内核崩溃或突然停电）时，日志文件系统更容易保持一致性，并且可以较快恢复。
+
 ![11](https://github.com/fighting-six/fightingsix/blob/master/picture/11.jpg)
 
 - 日志型文件系统有: ext3, ext4, xfs, ...
@@ -304,16 +313,20 @@ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
 - l:列表所分区id
 - t:调整分区id
 - 我们先fdisk -l /dev/sdb看看，sdb硬盘总共8G大，还没有分区
+
 ![13](https://github.com/fighting-six/fightingsix/blob/master/picture/13.jpg)
 
 - 使用fdisk /dev/sdb开始进行分区，键入n：创建新的分区，Tip：如果输入错误字符，需要按住Ctrl+←(Backspace)方可删除
+
 ![14](https://github.com/fighting-six/fightingsix/blob/master/picture/14.jpg)
 
 - 分配完所需分区后，此时分区表只是存放在内存中，键入w使其生效完成分区
+
 ![15](https://github.com/fighting-six/fightingsix/blob/master/picture/15.jpg)
 
 - 查看内核是否已经识别新的分区
 - cat/proc/partations
+
 ![16](https://github.com/fighting-six/fightingsix/blob/master/picture/16.jpg)
 
 ## 3.5.3 创建文件系统(格式化)
@@ -343,5 +356,6 @@ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
 
 ## 3.5.4 挂载使用
 - 在根目录下 mkdir MYDATA，然后用mount命令执行挂载，ls能看到Ext中标准产生的目录，到此硬盘分区，格式化，挂载，一切正常。
+
 ![18](https://github.com/fighting-six/fightingsix/blob/master/picture/18.jpg)
 
