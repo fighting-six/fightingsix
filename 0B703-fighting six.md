@@ -149,62 +149,81 @@
 
 <font face="黑体" color=gray size=72><P ALIGN="CENTER">第三章 构建目标系统</P></font>
 
-
-
 # 3.1 开发环境、源码以及编译工具
 
 
 ## 3.1.1 在用户目录下创建Rpi目录来存放内核源码以及编译工具
-- mkdir Rpi
-- cd Rpi
+
+
+    mkdir Rpi
+    cd Rpi
 
 ## 3.1.2 获取树莓派内核源码
 - 从GitHub上获取树莓派的内核源码，
-- git clone --depth=1 -b rpi-4.14.y https://github.com/raspberrypi/linux.git
+
+
+    git clone --depth=1 -b rpi-4.14.y https://github.com/raspberrypi/linux.git
 
 ## 3.1.3获取交叉编译工具链
 - 从GitHub获取树莓派的交叉编译工具：
-- git clone https://github.com/raspberrypi/tools
+git clone https://github.com/raspberrypi/tools
 - 目前，在 ~/Rpi 目录下已经有了 linux.tar.bz2 以及 tools.tar.bz2 两个压缩包，解压出来即可。最终内核源码以及编译工具的目录分别为：
-- ~/Rpi/linux
-- ~/Rpi/tools
+ ~/Rpi/linux
+ ~/Rpi/tools
 
 ## 3.1.4  修改环境变量，以方便使用编译工具
-- sudo vi ~/.bashrc
+
+
+    sudo vi ~/.bashrc
 - 编辑用户目录下的 .bashrc，把编译工具的执行路径加入到 PATH变量中，即在文件末尾加入以下两行：
-- export PATH=$PATH:$HOME/Rpi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
-- export PATH=$PATH:$HOME/Rpi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin
+
+
+    
+    export PATH=$PATH:$HOME/Rpi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+    export PATH=$PATH:$HOME/Rpi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin
 - 为使环境变量即时生效，可执行：
-- source .bashrc
+
+
+    source .bashrc
 
 
 # 3.2 内核的修改和配置、编译
 
 ## 3.2.1  树莓派3b+的设备树文件
 - 树莓派3b+的设备树文件为：
-- arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
+arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
 
 ## 3.2.2 内核的配置
 - 内核进行默认的配置
-- make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcm2709_defconfig
+	
 
+     make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcm2709_defconfig
+    
 ## 3.2.3 编译内核镜像、内核模块以及设备树
 - 编译内核镜像、内核模块和设备树：
-- make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- zImage modules dtbs -j8
+
+
+    make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- zImage modules dtbs -j8
 
 
 # 3.3 替换树莓派系统的内核镜像、设备树，以及内核模块的安装
 
 ## 3.3.1 替换掉树莓派的内核镜像
-- sudo scripts/mkknlimg arch/arm/boot/zImage /mnt/fat32/kernel7.img
+
+
+    sudo scripts/mkknlimg arch/arm/boot/zImage /mnt/fat32/kernel7.img
 
 ## 3.3.2 设备树相关文件的替换
-- sudo cp arch/arm/boot/dts/*.dtb /mnt/fat32/
-- sudo cp arch/arm/boot/dts/overlays/*.dtb* /mnt/fat32/overlays/
-- sudo cp arch/arm/boot/dts/overlays/README /mnt/fat32/overlays/
+
+
+    sudo cp arch/arm/boot/dts/*.dtb /mnt/fat32/
+    sudo cp arch/arm/boot/dts/overlays/*.dtb* /mnt/fat32/overlays/
+    sudo cp arch/arm/boot/dts/overlays/README /mnt/fat32/overlays/
 
 ## 3.3.3 内核模块的安装
-- sudo make ARCH=arm INSTALL_MOD_PATH=/mnt/ext4 modules_install
+
+
+    sudo make ARCH=arm INSTALL_MOD_PATH=/mnt/ext4 modules_install
 
 
 # 3.4 加载和卸载模块程序
@@ -306,8 +325,8 @@
 - 执行权限：root
 - 功能描述：进行格式化
 - 语法：
-- mkfs.FS_TYPE [options] /dev/DEVICE
-- mkfs –t FS_TYPE [options] /dev/DEVICE
+	 mkfs.FS_TYPE [options] /dev/DEVICE
+	 mkfs –t FS_TYPE [options] /dev/DEVICE
 - 选项：
 - -t { ext2 | ext3 | ext4 } ：指定文件系统
 - -b{ 1024 | 2048 | 4096 } ：指定数据块大小
@@ -326,4 +345,3 @@
 - 在根目录下 mkdir MYDATA，然后用mount命令执行挂载，ls能看到Ext中标准产生的目录，到此硬盘分区，格式化，挂载，一切正常。
 ![18](https://github.com/fighting-six/fightingsix/blob/master/picture/18.jpg)
 
- export PATH=$PATH:$HOME/Rpi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin
