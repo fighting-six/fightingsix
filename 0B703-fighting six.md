@@ -91,7 +91,7 @@
 
 
 [========]
-<font face="黑体" color=gray size=72><P ALIGN="CENTER">第二章</P></font>
+<font face="黑体" color=gray size=72><P ALIGN="CENTER">第二章 需求分析</P></font>
 
 # 2.1 项目名称：魔镜
 # 2.2 项目内容
@@ -146,3 +146,183 @@
 &#160; &#160; &#160; &#160;2. 百度Dueros开放平台
 
 &#160; &#160; &#160; &#160;3.   MagicMirror
+
+<font face="黑体" color=gray size=72><P ALIGN="CENTER">第三章 构建目标系统</P></font>
+
+
+
+# 3.1 开发环境、源码以及编译工具
+
+
+## 3.1.1 在用户目录下创建Rpi目录来存放内核源码以及编译工具
+- mkdir Rpi
+- cd Rpi
+
+## 3.1.2 获取树莓派内核源码
+- 从GitHub上获取树莓派的内核源码，
+- git clone --depth=1 -b rpi-4.14.y https://github.com/raspberrypi/linux.git
+
+## 3.1.3获取交叉编译工具链
+- 从GitHub获取树莓派的交叉编译工具：
+- git clone https://github.com/raspberrypi/tools
+- 目前，在 ~/Rpi 目录下已经有了 linux.tar.bz2 以及 tools.tar.bz2 两个压缩包，解压出来即可。最终内核源码以及编译工具的目录分别为：
+- ~/Rpi/linux
+- ~/Rpi/tools
+
+## 3.1.4  修改环境变量，以方便使用编译工具
+- sudo vi ~/.bashrc
+- 编辑用户目录下的 .bashrc，把编译工具的执行路径加入到 PATH变量中，即在文件末尾加入以下两行：
+- export PATH=$PATH:$HOME/Rpi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+- export PATH=$PATH:$HOME/Rpi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin
+- 为使环境变量即时生效，可执行：
+- source .bashrc
+
+
+# 3.2 内核的修改和配置、编译
+
+## 3.2.1  树莓派3b+的设备树文件
+- 树莓派3b+的设备树文件为：
+- arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
+
+## 3.2.2 内核的配置
+- 内核进行默认的配置
+- make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcm2709_defconfig
+
+## 3.2.3 编译内核镜像、内核模块以及设备树
+- 编译内核镜像、内核模块和设备树：
+- make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- zImage modules dtbs -j8
+
+
+# 3.3 替换树莓派系统的内核镜像、设备树，以及内核模块的安装
+
+## 3.3.1 替换掉树莓派的内核镜像
+- sudo scripts/mkknlimg arch/arm/boot/zImage /mnt/fat32/kernel7.img
+
+## 3.3.2 设备树相关文件的替换
+- sudo cp arch/arm/boot/dts/*.dtb /mnt/fat32/
+- sudo cp arch/arm/boot/dts/overlays/*.dtb* /mnt/fat32/overlays/
+- sudo cp arch/arm/boot/dts/overlays/README /mnt/fat32/overlays/
+
+## 3.3.3 内核模块的安装
+- sudo make ARCH=arm INSTALL_MOD_PATH=/mnt/ext4 modules_install
+
+
+# 3.4 加载和卸载模块程序
+
+- linux提供了module机制，能够动态的加载内核模块
+
+## 3.4.1 hello kernel代码
+- hello.c
+![pic3](https://github.com/fighting-six/fightingsix/blob/master/picture/pic3.jpg)
+
+## 3.4.2 Makefile
+![pic4](https://github.com/fighting-six/fightingsix/blob/master/picture/pic4.jpg)
+
+## 3.4.3 执行make
+![pic5](https://github.com/fighting-six/fightingsix/blob/master/picture/pic5.jpg)
+
+## 3.4.4 执行insmod加载内核模块
+![pic6](https://github.com/fighting-six/fightingsix/blob/master/picture/pic6.jpg)
+
+## 3.4.5 lsmod 可以查看到自己的模块
+![pic7](https://github.com/fighting-six/fightingsix/blob/master/picture/pic7.jpg)
+
+## 3.4.6 dmesg可以看到打印的log
+![pic8](https://github.com/fighting-six/fightingsix/blob/master/picture/pic8.jpg)
+
+## 3.4.7 执行rmmod卸载内核模块
+![pic9](https://github.com/fighting-six/fightingsix/blob/master/picture/pic9.jpg)
+
+## 3.4.8 dmesg可以看到打印的log
+![pic10](https://github.com/fighting-six/fightingsix/blob/master/picture/pic10.jpg)
+
+
+# 3.5 创建文件系统
+
+## 3.5.1 Linux文件系统分类
+- 日志文件系统
+
+- 指在文件系统发生变化时，先把相关的信息写入一个被称为日志的区域，然后再把变化写入主文件系统的文件系统。在文件系统发生故障（如内核崩溃或突然停电）时，日志文件系统更容易保持一致性，并且可以较快恢复。
+![11](https://github.com/fighting-six/fightingsix/blob/master/picture/11.jpg)
+
+- 日志型文件系统有: ext3, ext4, xfs, ...
+
+
+- 非日志文件系统
+- 与日志文件系统相反
+![12](https://github.com/fighting-six/fightingsix/blob/master/picture/12.jpg)
+
+- 非日志型文件系统有: ext2, vfat，...
+
+
+
+
+## 3.5.2 硬盘分区
+
+- 主分区和扩展分区最多可以有四个(硬盘限制)
+- 扩展分区最多只能有一个(操作系统的限制)
+- 逻辑分区是由扩展分区下分隔出来的
+- 作为数据存储的分区为主分区和逻辑分区能够被格式化，扩展分区无法格式化
+- 对于一块硬盘来讲，在Linux系统中IDE硬盘最多有63个分区，SATA硬盘则有15个分区
+
+- 命令名称：fdisk
+- 命令所在路径：/sbin/fdisk
+- 执行权限：root
+- 功能描述：分区管理工具
+- 语法：
+
+- fdisk–l [-u] [device…]       显示
+- fdisk[device]                设置
+- 子命令：
+- fdisk device
+- 子命令：管理功能
+- p:print, 显示已有分区；
+- n:new, 创建
+- d:delete, 删除
+- w:write, 写入磁盘并退出
+- q:quit, 放弃更新并退出
+- m:获取帮助
+- l:列表所分区id
+- t:调整分区id
+- 我们先fdisk -l /dev/sdb看看，sdb硬盘总共8G大，还没有分区
+![13](https://github.com/fighting-six/fightingsix/blob/master/picture/13.jpg)
+
+- 使用fdisk /dev/sdb开始进行分区，键入n：创建新的分区，Tip：如果输入错误字符，需要按住Ctrl+←(Backspace)方可删除
+![14](https://github.com/fighting-six/fightingsix/blob/master/picture/14.jpg)
+
+- 分配完所需分区后，此时分区表只是存放在内存中，键入w使其生效完成分区
+![15](https://github.com/fighting-six/fightingsix/blob/master/picture/15.jpg)
+
+- 查看内核是否已经识别新的分区
+- cat/proc/partations
+![16](https://github.com/fighting-six/fightingsix/blob/master/picture/16.jpg)
+
+## 3.5.3 创建文件系统(格式化)
+
+- 在Unix/Linux环境下，通常使用mkfs命令执行格式化操作，mkfs命令需要的参数有设备路径和文件系统格式等。需要注意的是：对硬盘执行格式化操作时，用户需要拥有超级用户权限。
+
+- 命令名称：mkfs
+- 命令所在路径：/sbin/mkfs
+- 执行权限：root
+- 功能描述：进行格式化
+- 语法：
+- mkfs.FS_TYPE [options] /dev/DEVICE
+- mkfs –t FS_TYPE [options] /dev/DEVICE
+- 选项：
+- -t { ext2 | ext3 | ext4 } ：指定文件系统
+- -b{ 1024 | 2048 | 4096 } ：指定数据块大小
+- -L‘LABEL’ ：指定标签
+- -j：相当于 –t ext3
+- mkfs.ext3= mkfs –t ext3 = mke2fs –j = mke2fs –t ext3
+- -I #：为数据空间中每多少个字节创建一个inode；此大小不应该小于block的大小；
+- -N #：为数据空间创建个多少个inode；
+- -m #: 为管理人员预留的空间占据的百分比；
+- -O FEATURE [,...]：启用指定特性
+- -O ^FEATURE：关闭指定特性
+- 开始对上述sdb1分区进行格式化，写入文件系统
+![17](https://github.com/fighting-six/fightingsix/blob/master/picture/17.jpg)
+
+## 3.5.4 挂载使用
+- 在根目录下 mkdir MYDATA，然后用mount命令执行挂载，ls能看到Ext中标准产生的目录，到此硬盘分区，格式化，挂载，一切正常。
+![18](https://github.com/fighting-six/fightingsix/blob/master/picture/18.jpg)
+
