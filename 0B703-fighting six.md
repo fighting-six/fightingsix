@@ -547,6 +547,21 @@ showNextDayAfter: undefined
 
 ![M_09](https://github.com/fighting-six/fightingsix/blob/master/picture/M_09.png "M_09")
 
+### 4.2.9设置竖屏
+
+在终端输入：sudo nano /boot/config.txt，修改配置文件
+
+![M_24](https://github.com/fighting-six/fightingsix/blob/master/picture/M_24.png "M_24")
+
+最后一行添加：display_rotate=1
+
+![M_25](https://github.com/fighting-six/fightingsix/blob/master/picture/M_25.png "M_25")
+
+按Ctrl+O保存，回车，Ctrl+X退出。即可实现竖屏，本次实验以横屏展示。
+
+![M_26](https://github.com/fighting-six/fightingsix/blob/master/picture/M_26.png "M_26")
+
+
 ## 4.3语音模块
 
 ### 4.3.1硬件环境搭建
