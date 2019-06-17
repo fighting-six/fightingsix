@@ -420,21 +420,21 @@ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
 
  将这个一串数字，替换掉文档中的 YOUR_OPENWEATHER_API_KEY
 
-![M_04](https://github.com/fightingsix/fightingsix/blob/master/picture/M_04.png "M_04")
+![M_04](https://github.com/fighting-six/fightingsix/blob/master/picture/M_04.png "M_04")
 
 此时天气会显示出来NewYork的天气，可以通过location的代码文件，修改里面的城市和location ID,来改为本地天气，如图所示：
 
-![M_05](https://github.com/fightingsix/fightingsix/blob/master/picture/M_05.png "M_05")
+![M_05](https://github.com/fighting-six/fightingsix/blob/master/picture/M_05.png "M_05")
 
 ### 4.2.5加载底部新闻
 
 模块自带新闻，可以修改RSS 订阅源改为国内的新闻。
 
-![M_06](https://github.com/fightingsix/fightingsix/blob/master/picture/M_06.png "M_06")
+![M_06](https://github.com/fighting-six/fightingsix/blob/master/picture/M_06.png "M_06")
 
 可以修改为Engadget中国版并保存：
 
-![M_07](https://github.com/fightingsix/fightingsix/blob/master/picture/M_07.png "M_07")
+![M_07](https://github.com/fighting-six/fightingsix/blob/master/picture/M_07.png "M_07")
 
 
 ### 4.2.6问候语设置
@@ -451,7 +451,7 @@ Ctrl+空格 切换中英文。
 
 在相应的位置加上自己想要的问候语。
 
-![M_08](https://github.com/fightingsix/fightingsix/blob/master/picture/M_08.png "M_08")
+![M_08](https://github.com/fighting-six/fightingsix/blob/master/picture/M_08.png "M_08")
 
 
 ### 4.2.7小地球图标添加
@@ -545,5 +545,5 @@ showNextDayAfter: undefined
 
 其中，updateInterval 为内容更新频率，1×60×60×1000ms=1h， timeslot和lessons中引号里面为字符串，可以为各种形式，通过修改该部分可以显示课程表。
 
-![M_09](https://github.com/fightingsix/fightingsix/blob/master/picture/M_09.png "M_09")
+![M_09](https://github.com/fighting-six/fightingsix/blob/master/picture/M_09.png "M_09")
 
