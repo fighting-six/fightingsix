@@ -376,7 +376,7 @@ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
  
  bash -c "$(curl -sL https://raw.githubusercontent.com/MichMich/MagicMirror/master/installers/raspberry.sh)"
  
- 即可完成MagicMirror²平台的安装。
+ 即可完成MagicMirror²平台的安装，并且可以实现自启动。
  
  可以通过以下命令来完成平台版本的更新：
  
@@ -385,7 +385,7 @@ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
 
 ### 4.2.2魔镜屏幕设置常亮
  
- 魔镜的显示需要屏幕常亮，不然的话会自动待机息屏，让我们禁用屏幕保护程序：
+ 魔镜的显示需要屏幕常亮，不然的话会自动待机息屏，所以需要禁用屏幕保护程序：
  
  在终端输入：
  
@@ -439,7 +439,7 @@ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
 
 ### 4.2.6问候语设置
 
-为了安装中文问候语，先安装中文输入法：
+为了显示中文问候语，先安装中文输入法：
 
 终端输入：sudo apt-get install scim-pinyin
 
