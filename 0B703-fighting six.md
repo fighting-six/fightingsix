@@ -371,34 +371,55 @@ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
 
 ### 4.2.1安装编译平台
  Electron是MagicMirror²的应用程序包，支持Raspberry Pi 2/3的自动安装。
+ 
  在树莓派上执行以下命令以安装MagicMirror²：
+ 
  bash -c "$(curl -sL https://raw.githubusercontent.com/MichMich/MagicMirror/master/installers/raspberry.sh)"
+ 
  即可完成MagicMirror²平台的安装。
+ 
  可以通过以下命令来完成平台版本的更新：
+ 
  git pull && npm install
 
 
 ### 4.2.2魔镜屏幕设置常亮
+ 
  魔镜的显示需要屏幕常亮，不然的话会自动待机息屏，让我们禁用屏幕保护程序：
+ 
  在终端输入：
+ 
  sudo nano/etc/xdg/lxsession/LXDE-pi/autostart
+ 
  并将以下内容添加到文件的底部
+ 
  @xset s noblank
+ 
  @xset s off
+ 
  @xset -dpms
+ 
  保存并退出。
 
 ### 4.2.3语言设置为中文
+ 
  打开config.js文件，并将将language改成“zh-cn”；
+
 ![M_01](https://github.com/fighting-six/fightingsix/blob/master/picture/M_01.png "M_01")
+ 
  再运行时，就会显示中文。
 
 ### 4.2.4显示天气及天气预报
  打开config.js文件，进入后面的网址https://home.openweathermap.org ，来调用天气的API.
+ 
 ![M_02](https://github.com/fighting-six/fightingsix/blob/master/picture/M_02.png "M_02")
+ 
  在该网址上注册后，会得到一个API密钥，
+
 ![M_03](https://github.com/fightingsix/fightingsix/blob/master/picture/M_03.png "M_03")
+ 
  将这个一串数字，替换掉文档中的 YOUR_OPENWEATHER_API_KEY
+
 ![M_04](https://github.com/fightingsix/fightingsix/blob/master/picture/M_04.png "M_04")
  此时天气会显示出来NewYork的天气，可以通过location的代码文件，修改里面的城市和location ID,来改为本地天气，如图所示：
 ![M_05](https://github.com/fightingsix/fightingsix/blob/master/picture/M_05.png "M_05")
