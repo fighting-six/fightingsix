@@ -547,3 +547,55 @@ showNextDayAfter: undefined
 
 ![M_09](https://github.com/fighting-six/fightingsix/blob/master/picture/M_09.png "M_09")
 
+## 4.3语音模块
+
+### 4.3.1硬件环境搭建
+
+### 4.3.1.1麦克风配置
+
+1)	使用 lsusb 命令，查看是否连接上 USB 麦克风
+
+![M_10](https://github.com/fighting-six/fightingsix/blob/master/picture/M_10.png "M_10")
+
+2)	安装 arecord： sudo apt-get install arecord
+
+3)	使用 arecord 进行录音测试：
+
+sudo arecord -D "plughw:1,0" -d 5 -r 16000 -c 1 -t wav -f S16_LE test.wav
+
+- D ：选择设备， 外部设备是 plughw:1,0，内部设备是 plughw:0,0， 树莓派本身并没有录音模块，所以没有内部设备。
+- d :  录音时间（s），-d 5 的意思就是录制时间为 5 秒，如果不加这个参数就是一直录音直到 ctrl+c 停止
+- r : 频率，
+- c : 音轨
+- t : 文件类型
+- f : 格式
+
+录音结束后，文件保存在当前目录。可以通过“ls”命令查看。
+
+### 4.3.1.2音箱配置
+
+默认的情况下，树莓派是通过 HDMI 输出音频。而音箱需要用到耳机孔输出，这时需要修改树莓派的配置。
+
+1)	sudo raspi-config
+
+2)	Advanced Options
+
+![M_11](https://github.com/fighting-six/fightingsix/blob/master/picture/M_11.png "M_11")
+
+3)	Audio
+
+![M_12](https://github.com/fighting-six/fightingsix/blob/master/picture/M_12.png "M_12")
+
+4)	Force 3.5mm (‘headphone’) jack
+
+![M_13](https://github.com/fighting-six/fightingsix/blob/master/picture/M_13.png "M_13")
+
+确定后可以将树莓派音频输出强制设置为 3.5mm 音频输出接口 （ 3.5mm (‘headphone’) jack ）了。
+
+5)	树莓派上播放音频，在初始化条件下声音比较小，这时可以通过安装
+alsamixer 来调节音量。
+
+- 安装：sudo apt-get alsamixer
+- 调节：alsamixer(通过键盘的↑、↓进行调节) 播放：aplay test.wav
+- 播放：aplay test.wav
+
