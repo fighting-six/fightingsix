@@ -666,10 +666,43 @@ hyper 库用来支持 http2.0 client, pyaudio 用来支持录音，tornado 用�
 
 ![M_19](https://github.com/fighting-six/fightingsix/blob/master/picture/M_19.png "M_19")
 
+#### 4.3.3.5两种触发识别
+
+1)	唤醒加识别（“小度小度”唤醒）
+
+./wakeup_trigger_start.sh
+
+2)	enter 按键触发识别
+
+./enter_trigger_start.sh
+
+### 4.3.4添加或删除 DuerOS 的技能
+
+#### 4.3.4.1	在设备控制台添加或关闭技能
+
+在设备控制台—“编辑”场景—云服务配置中，可以进行默认 BOT 技能的添加和关闭
+
+![M_23](https://github.com/fighting-six/fightingsix/blob/master/picture/M_23.png "M_23")
+
+#### 4.3.4.2	小度之家添加和删除技能
+
+用户可以使用百度 UNIT 平台设计自定义 BOT 技能，技能发布上线后，
+DuerOS 平台可以通过 DuerOS 小度之家 APP 中的技能商店安装技能，实现更多功能和自定义功能。通过小度之家添加和删除技能的方法如下：
+
+1)	点击技能商店，选择分类，点击内容资源（智能家居的技能都需要相关设备和绑定相关账号，这里只是进行示例操作，所以没有选择智能家居的技能）；
+
+![M_20](https://github.com/fighting-six/fightingsix/blob/master/picture/M_20.png "M_20")
 
 
+2)	选择技能“精彩演讲”，点击启用；
 
+![M_21](https://github.com/fighting-six/fightingsix/blob/master/picture/M_21.png "M_21")
 
+3)	通过“小度小度”唤醒树莓派的 DuerOS，说“打开精彩演讲”，树莓派开始播放 TED 演讲，技能可以正常使用；
+
+4)	点击“我的”，可以查看 DuerOS 已有技能，并删除不想要的技能。
+
+![M_22](https://github.com/fighting-six/fightingsix/blob/master/picture/M_22.png "M_22")
 
 
 
