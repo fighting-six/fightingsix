@@ -416,8 +416,8 @@ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
  
  在该网址上注册后，会得到一个API密钥，
 
-![M_03](https://github.com/fightingsix/fightingsix/blob/master/picture/M_03.png "M_03")
- 
+![M_03](https://github.com/fighting-six/fightingsix/blob/master/picture/M_03.png "M_03")
+
  将这个一串数字，替换掉文档中的 YOUR_OPENWEATHER_API_KEY
 
 ![M_04](https://github.com/fightingsix/fightingsix/blob/master/picture/M_04.png "M_04")
