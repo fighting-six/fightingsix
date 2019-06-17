@@ -551,7 +551,7 @@ showNextDayAfter: undefined
 
 ### 4.3.1硬件环境搭建
 
-### 4.3.1.1麦克风配置
+#### 4.3.1.1麦克风配置
 
 1)	使用 lsusb 命令，查看是否连接上 USB 麦克风
 
@@ -572,7 +572,7 @@ sudo arecord -D "plughw:1,0" -d 5 -r 16000 -c 1 -t wav -f S16_LE test.wav
 
 录音结束后，文件保存在当前目录。可以通过“ls”命令查看。
 
-### 4.3.1.2音箱配置
+#### 4.3.1.2音箱配置
 
 默认的情况下，树莓派是通过 HDMI 输出音频。而音箱需要用到耳机孔输出，这时需要修改树莓派的配置。
 
@@ -598,4 +598,80 @@ alsamixer 来调节音量。
 - 安装：sudo apt-get alsamixer
 - 调节：alsamixer(通过键盘的↑、↓进行调节) 播放：aplay test.wav
 - 播放：aplay test.wav
+
+### 4.3.2 DuerOS 平台设置
+
+1)	打开 DuerOS 开放平台：https://dueros.baidu.com/open，点击 “登录”，用百度账号进行登录；
+
+2)	登录成功后，点击 “开发者认证”，填写相关信息。并上传身份证照片，要求必须是“身份证原件的照片”，复印件和扫描件都不可以。点击已阅读相关协议，点击提交认证。两个工作日内，即可通过认证。 
+
+![M_14](https://github.com/fighting-six/fightingsix/blob/master/picture/M_14.png "M_14")
+
+3)       点击右上角“控制台”，选择“设备控制台”，点击“配置新设备”
+
+![M_15](https://github.com/fighting-six/fightingsix/blob/master/picture/M_15.png "M_15")
+
+4)	依次选择“音箱”—“Linux”—填写创建的产品名称并申请 client_id— 云服务配置—完成。
+
+5)	将鼠标放在已创建的场景上，可以进行编辑、删除、查看 client_id 等操作。
+
+![M_16](https://github.com/fighting-six/fightingsix/blob/master/picture/M_16.png "M_16")
+
+### 4.3.3 DuerOS Python SDK 的安装
+
+#### 4.3.3.1安装依赖环境
+
+- sudo apt-get updat
+- sudo apt-get install python-dateutil
+- sudo apt-get install gir1.2-gstreamer-1.0
+- sudo apt-get install python-pyaudio
+- sudo apt-get install libatlas-base-dev
+- sudo apt-get install python-dev
+- sudo pip install tornado
+- sudo pip install hyper
+
+hyper 库用来支持 http2.0 client, pyaudio 用来支持录音，tornado 用来完成oauth 认证。
+
+#### 4.3.3.2下载并安装编译好的 openssl 和 Python
+
+要更新 openssl 才能支持 python sdk 的使用。
+
+- openssl 安装包：https://eyun.baidu.com/s/3jJmdsbW 密码：EyA4
+- python2.7.14 安装包：https://eyun.baidu.com/s/3c3SSVao 密码：0sDM
+- sudo tar -zxvf openssl1.1.tar.gz -C /usr
+- sudo tar -zxvf python2.7.14.tar.gz -C /usr/local/
+- sudo rm -rf /usr/bin/python
+- sudo ln -s /usr/local/python2.7.14/bin/python /usr/bin/python
+
+
+#### 4.3.3.3下载 Python SDK 和参考示例代码
+
+- git clone https://github.com/MyDuerOS/DuerOS-Python-Client.git
+- cd DuerOS-Python-Client
+- git checkout raspberry-dev
+
+#### 4.3.3.4授权
+
+./auth.sh
+
+直接运行使用默认的 client_id 和 client_secret，也可以替换成个人在 DuerOS
+开放平台申请的 client_id 和 client_secret，进而实现在控制台自定义的配置属性。
+(修改 app/auth.py 文件)
+
+![M_17](https://github.com/fighting-six/fightingsix/blob/master/picture/M_17.png "M_17")
+
+修改 client_id 和 client_screct 后，需要在开放平台中“安全设置”的“授权回调页"，设置成 http://127.0.0.1:3000/authresponse
+
+![M_18](https://github.com/fighting-six/fightingsix/blob/master/picture/M_18.png "M_18")
+
+![M_19](https://github.com/fighting-six/fightingsix/blob/master/picture/M_19.png "M_19")
+
+
+
+
+
+
+
+
+
 
