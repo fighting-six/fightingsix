@@ -362,9 +362,12 @@ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
 
 <font face="黑体" color=gray size=72><P ALIGN="CENTER">第四章 魔镜实验流程
 
-## 4.1实现的功能
- 中文显示，天气及天气预报的显示，新闻显示，问候语显示，课程表显示，语音模块
+## 参考
 
+ https://github.com/MichMich/MagicMirror
+
+## 4.1.1实现的功能
+ 中文显示，天气及天气预报的显示，新闻显示，问候语显示，课程表显示，语音模块
 
 
 ## 4.2各部分具体实现过程
