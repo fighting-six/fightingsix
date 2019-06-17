@@ -705,7 +705,7 @@ DuerOS 平台可以通过 DuerOS 小度之家 APP 中的技能商店安装技能
 ![M_22](https://github.com/fighting-six/fightingsix/blob/master/picture/M_22.png "M_22")
 
 
-### 4.3.5遇到的问题
+### 4.3.5可能遇到的问题
 
 1.DuerOS 身份认证不通过： 
 
