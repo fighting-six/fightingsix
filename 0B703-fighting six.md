@@ -363,108 +363,108 @@ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
 <font face="黑体" color=gray size=72><P ALIGN="CENTER">第四章 魔镜实验流程
 
 ## 4.1实现的功能
-- 中文显示，天气及天气预报的显示，新闻显示，问候语显示，课程表显示，语音模块
+ 中文显示，天气及天气预报的显示，新闻显示，问候语显示，课程表显示，语音模块
 
 
 
 ## 4.2各部分具体实现过程
 
 ### 4.2.1安装编译平台
-- Electron是MagicMirror²的应用程序包，支持Raspberry Pi 2/3的自动安装。
-- 在树莓派上执行以下命令以安装MagicMirror²：
-- bash -c "$(curl -sL https://raw.githubusercontent.com/MichMich/MagicMirror/master/installers/raspberry.sh)"
-- 即可完成MagicMirror²平台的安装。
-- 可以通过以下命令来完成平台版本的更新：
-- git pull && npm install
+ Electron是MagicMirror²的应用程序包，支持Raspberry Pi 2/3的自动安装。
+ 在树莓派上执行以下命令以安装MagicMirror²：
+ bash -c "$(curl -sL https://raw.githubusercontent.com/MichMich/MagicMirror/master/installers/raspberry.sh)"
+ 即可完成MagicMirror²平台的安装。
+ 可以通过以下命令来完成平台版本的更新：
+ git pull && npm install
 
 
 ### 4.2.2魔镜屏幕设置常亮
-- 魔镜的显示需要屏幕常亮，不然的话会自动待机息屏，让我们禁用屏幕保护程序：
-- 在终端输入：
-- sudo nano/etc/xdg/lxsession/LXDE-pi/autostart
-- 并将以下内容添加到文件的底部
-- @xset s noblank
-- @xset s off
-- @xset -dpms
-- 保存并退出。
+ 魔镜的显示需要屏幕常亮，不然的话会自动待机息屏，让我们禁用屏幕保护程序：
+ 在终端输入：
+ sudo nano/etc/xdg/lxsession/LXDE-pi/autostart
+ 并将以下内容添加到文件的底部
+ @xset s noblank
+ @xset s off
+ @xset -dpms
+ 保存并退出。
 
 ### 4.2.3语言设置为中文
-- 打开config.js文件，并将将language改成“zh-cn”；
+ 打开config.js文件，并将将language改成“zh-cn”；
 ![M_01](https://github.com/fighting-six/fightingsix/blob/master/picture/M_01.png "M_01")
-- 再运行时，就会显示中文。
+ 再运行时，就会显示中文。
 
 ### 4.2.4显示天气及天气预报
-- 打开config.js文件，进入后面的网址https://home.openweathermap.org ，来调用天气的API.
+ 打开config.js文件，进入后面的网址https://home.openweathermap.org ，来调用天气的API.
 ![M_02](https://github.com/fighting-six/fightingsix/blob/master/picture/M_02.png "M_02")
-- 在该网址上注册后，会得到一个API密钥，
+ 在该网址上注册后，会得到一个API密钥，
 ![M_03](https://github.com/fightingsix/fightingsix/blob/master/picture/M_03.png "M_03")
-- 将这个一串数字，替换掉文档中的 YOUR_OPENWEATHER_API_KEY
+ 将这个一串数字，替换掉文档中的 YOUR_OPENWEATHER_API_KEY
 ![M_04](https://github.com/fightingsix/fightingsix/blob/master/picture/M_04.png "M_04")
-- 此时天气会显示出来NewYork的天气，可以通过location的代码文件，修改里面的城市和location ID,来改为本地天气，如图所示：
+ 此时天气会显示出来NewYork的天气，可以通过location的代码文件，修改里面的城市和location ID,来改为本地天气，如图所示：
 ![M_05](https://github.com/fightingsix/fightingsix/blob/master/picture/M_05.png "M_05")
 
 ### 4.2.5加载底部新闻
-- 模块自带新闻，可以修改RSS 订阅源改为国内的新闻。
+ 模块自带新闻，可以修改RSS 订阅源改为国内的新闻。
 ![M_06](https://github.com/fightingsix/fightingsix/blob/master/picture/M_06.png "M_06")
-- 可以修改为Engadget中国版并保存：
+ 可以修改为Engadget中国版并保存：
 ![M_07](https://github.com/fightingsix/fightingsix/blob/master/picture/M_07.png "M_07")
 
 ### 4.2.6问候语设置
-- 为了安装中文问候语，先安装中文输入法：
-- 终端输入：sudo apt-get install scim-pinyin
-- 安装完成后需要重启才能生效
-- Ctrl+空格 切换中英文。
+ 为了安装中文问候语，先安装中文输入法：
+ 终端输入：sudo apt-get install scim-pinyin
+ 安装完成后需要重启才能生效
+ Ctrl+空格 切换中英文。
 
-- 打开compliments.js文件，位置位于/home/pi/MagicMirror/modules/default/compliments
-- 在相应的位置加上自己想要的问候语。
+ 打开compliments.js文件，位置位于/home/pi/MagicMirror/modules/default/compliments
+ 在相应的位置加上自己想要的问候语。
 ![M_08](https://github.com/fightingsix/fightingsix/blob/master/picture/M_08.png "M_08")
 
 ### 4.2.7小地球图标添加
-- 在终端里输入以下代码：
-- cd ~/MagicMirror/modules
-- git clone https://github.com/mykle1/MMM-EARTH.git
-- cd ~/MagicMirror/modules/MMM-EARTH
-- npm install
-- 然后再config里面modules模块里添加下面一段代码
-- {
-- module: "MMM-EARTH",
-- position: "bottom_center",
-- config: {
-- mode: "Natural",
-- rotateInterval: 15000,
-- MaxWidth: "50%",
-- MaxHeight: "50%",
-- }
-- },
-- 运行，即可显示出地球图标。
+ 在终端里输入以下代码：
+ cd ~/MagicMirror/modules
+ git clone https://github.com/mykle1/MMM-EARTH.git
+ cd ~/MagicMirror/modules/MMM-EARTH
+ npm install
+ 然后再config里面modules模块里添加下面一段代码
+ {
+ module: "MMM-EARTH",
+ position: "bottom_center",
+ config: {
+ mode: "Natural",
+ rotateInterval: 15000,
+ MaxWidth: "50%",
+ MaxHeight: "50%",
+ }
+ },
+ 运行，即可显示出地球图标。
 
 ### 4.2.8添加课程表
-- 在终端依次键入以下代码
-- cd ~/MagicMirror/modules
-- gitclone https://github.com/pinsdorf/MMM-WeeklySchedule.git
-- cd ~/MagicMirror/modules/MMM-WeeklySchedule
-- npm install
-- 然后再config里面modules模块里添加下面一段代码
-- {
-- module: "MMM-WeeklySchedule",
-- position: "top_left",
-- header: "Household chores",
-- config: {
-- schedule: {
-- timeslots: [ "Feed thefish", "Set the table", "Take out the trash","Hoover living room" ],
-- lessons: {
-- mon: ["Bart", "Marge","Homer", "Lisa" ],
-- tue: ["Lisa", "Bart", "Marge", "Homer" ],
-- wed: ["Homer", "Lisa", "Bart", "Marge" ],
-- thu: [ "Marge","Homer", "Lisa", "Bart" ],
-- fri: ["Bart", "Marge","Homer", "Lisa" ]
-- }
-- },
-- updateInterval: 1 * 60 * 60 * 1000,// every hour
-- showNextDayAfter: undefined
-- }
-- },
+ 在终端依次键入以下代码
+ cd ~/MagicMirror/modules
+ gitclone https://github.com/pinsdorf/MMM-WeeklySchedule.git
+ cd ~/MagicMirror/modules/MMM-WeeklySchedule
+ npm install
+ 然后再config里面modules模块里添加下面一段代码
+ {
+ module: "MMM-WeeklySchedule",
+ position: "top_left",
+ header: "Household chores",
+ config: {
+schedule: {
+ timeslots: [ "Feed thefish", "Set the table", "Take out the trash","Hoover living room" ],
+ lessons: {
+ mon: ["Bart", "Marge","Homer", "Lisa" ],
+ tue: ["Lisa", "Bart", "Marge", "Homer" ],
+ wed: ["Homer", "Lisa", "Bart", "Marge" ],
+ thu: [ "Marge","Homer", "Lisa", "Bart" ],
+ fri: ["Bart", "Marge","Homer", "Lisa" ]
+}
+},
+updateInterval: 1 * 60 * 60 * 1000,// every hour
+showNextDayAfter: undefined
+}
+},
 
-- 其中，updateInterval 为内容更新频率，1×60×60×1000ms=1h， timeslot和lessons中引号里面为字符串，可以为各种形式，通过修改该部分可以显示课程表。
+其中，updateInterval 为内容更新频率，1×60×60×1000ms=1h， timeslot和lessons中引号里面为字符串，可以为各种形式，通过修改该部分可以显示课程表。
 ![M_09](https://github.com/fightingsix/fightingsix/blob/master/picture/M_09.png "M_09")
 
